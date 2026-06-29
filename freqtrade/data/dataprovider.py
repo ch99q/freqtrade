@@ -85,6 +85,15 @@ class DataProvider:
         """
         self.__slice_date = limit_date
 
+    @property
+    def slice_date(self) -> datetime | None:
+        """
+        The simulated "current date" during backtesting and hyperopt, set on each
+        candle. None in live and dry-run, where the current time is wall-clock now.
+        Lets a pairlist handler read historical data as of the simulated time.
+        """
+        return self.__slice_date
+
     def _set_cached_df(
         self, pair: str, timeframe: str, dataframe: DataFrame, candle_type: CandleType
     ) -> None:
